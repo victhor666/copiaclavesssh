@@ -1,9 +1,3 @@
-# mecanismo didáctico para qeu se vea como copiar una clave de un usuario que no es root a otro usuario en otro servidor. 
-# Es decir, quiero copiar la clave del usuario ansible en el servidor 2, pero solo tengo acceso a través del usuario ubuntu 
-# (que tiene permisos sudo)
-
-
-
 cat /home/ansible/.ssh/id_rsa.pub \  #esta es la clave del usuario ansible de mi maquina
 | ssh -i key.pem ubuntu@maquina2 \ #nos conectamos con el usuario para el cual tenemos la clave
 "sudo mkdir /home/ansible/.ssh;\ # y aqui, tenemos que crear el directorio .ssh
@@ -13,7 +7,7 @@ cat >> /home/ansible/.ssh/authorized_keys; \# volcamos el contenido en el ficher
 sudo chown -R ansible:ansible /home/ansible/.ssh/ \ #y lo dejamos con permisos del usuario ansible
 sudo chmod 440 /home/ansible/.ssh/authorized_keys" # y le quitamos los permisos que si no no funciona
 
-aqui para que podáis copiar y pegar sin más o meterlo en un script
+# aqui para que podáis copiar y pegar sin más o meterlo en un script
 
 cat /home/ansible/.ssh/id_rsa.pub| ssh -i key.pem ubuntu@maquina2 "sudo mkdir /home/ansible/.ssh;
 sudo touch /home/ansible/.ssh/authorized_keys;
